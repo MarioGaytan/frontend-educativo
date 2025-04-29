@@ -53,9 +53,9 @@ function Users() {
 
   return (
     <div style={{ padding: "2rem" }}>
-      <h1>Usuarios Registrados</h1>
+      <h1 style={{ marginBottom: "1rem" }}>Usuarios Registrados</h1>
 
-      <button onClick={() => navigate("/topics")} style={{ marginBottom: "1rem" }}>
+      <button onClick={() => navigate("/topics")} style={styles.buttonNav}>
         Ir a Temas
       </button>
 
@@ -65,7 +65,7 @@ function Users() {
         onCancel={() => setEditingUser(null)}
       />
 
-      <table border="1" cellPadding="10" style={{ width: "100%", marginTop: "1rem", textAlign: "left" }}>
+      <table style={styles.table}>
         <thead>
           <tr>
             <th>Nombre de usuario</th>
@@ -82,24 +82,52 @@ function Users() {
                 <td>{user.role_id}</td>
                 <td>{new Date(user.createdAt).toLocaleString()}</td>
                 <td>
-                  <button onClick={() => setEditingUser(user)} style={{ marginRight: "0.5rem" }}>
+                  <button onClick={() => setEditingUser(user)} style={styles.buttonPrimary}>
                     Editar
                   </button>
-                  <button onClick={() => handleDelete(user._id)}>
+                  <button onClick={() => handleDelete(user._id)} style={styles.buttonDanger}>
                     Eliminar
                   </button>
                 </td>
               </tr>
             ))
           ) : (
-            <tr>
-              <td colSpan="4">No hay usuarios registrados</td>
-            </tr>
+            <tr><td colSpan="4">No hay usuarios registrados</td></tr>
           )}
         </tbody>
       </table>
     </div>
   );
 }
+
+const styles = {
+  buttonNav: {
+    marginBottom: "2rem",
+    backgroundColor: "#8e44ad",
+    color: "white",
+    padding: "0.5rem 1rem",
+    border: "none",
+    cursor: "pointer",
+  },
+  buttonPrimary: {
+    marginRight: "0.5rem",
+    backgroundColor: "#2980b9",
+    color: "white",
+    padding: "0.3rem 0.6rem",
+    border: "none",
+    cursor: "pointer",
+  },
+  buttonDanger: {
+    backgroundColor: "#c0392b",
+    color: "white",
+    padding: "0.3rem 0.6rem",
+    border: "none",
+    cursor: "pointer",
+  },
+  table: {
+    width: "100%",
+    borderCollapse: "collapse",
+  }
+};
 
 export default Users;
